@@ -2,7 +2,6 @@
 FROM resin/armv7hf-debian-qemu:latest
 # Default configuration
 RUN [ "cross-build-start" ]
-COPY mopidy.conf /var/lib/mopidy/.config/mopidy/mopidy.conf
 
 RUN set -ex \
     # Official Mopidy install for Debian/Ubuntu along with some extensions
@@ -44,6 +43,7 @@ RUN [ "cross-build-end" ]
 # Run as mopidy user
 USER mopidy
 
+COPY mopidy.conf /var/lib/mopidy/.config/mopidy/mopidy.conf
 VOLUME ["/mopidy/data_dir", "/mopidy/cache", "/mopidy/media", "/mopidy/playlists"]
 
 EXPOSE 6600 6680
