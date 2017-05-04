@@ -11,7 +11,6 @@ RUN set -ex \
  && DEBIAN_FRONTEND=noninteractive apt-get install -y \
         curl \
         gcc \
-	gstreamer0.10-alsa \
 	python-crypto \
 	build-essential \
  && curl -L https://apt.mopidy.com/mopidy.gpg -o /tmp/mopidy.gpg \
@@ -45,7 +44,7 @@ RUN [ "cross-build-end" ]
 # Run as mopidy user
 USER mopidy
 
-VOLUME ["/var/lib/mopidy/local", "/var/lib/mopidy/media"]
+VOLUME ["/mopidy/data_dir", "/mopidy/cache", "/mopidy/media", "/mopidy/playlists"]
 
 EXPOSE 6600 6680
 
