@@ -30,10 +30,8 @@ RUN set -ex \
         gcc \
 	build-essential \
  && apt-get clean \
- && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* ~/.cache \
-    # Limited access rights.
-
-
+ && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* ~/.cache 
+# Limited access rights.
 
 # Add Tini
 ENV TINI_VERSION v0.14.0
