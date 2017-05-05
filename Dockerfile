@@ -12,6 +12,7 @@ RUN set -ex \
         gcc \
 	python-crypto \
 	build-essential \
+	gstreamer1.0-alsa \
  && curl -L https://apt.mopidy.com/mopidy.gpg -o /tmp/mopidy.gpg \
  && curl -L https://apt.mopidy.com/mopidy.list -o /etc/apt/sources.list.d/mopidy.list \
  && apt-key add /tmp/mopidy.gpg \
