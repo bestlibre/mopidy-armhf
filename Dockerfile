@@ -32,18 +32,19 @@ RUN set -ex \
  && apt-get clean \
  && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* ~/.cache \
     # Limited access rights.
- && chown mopidy:audio -R /var/lib/mopidy/.config
+
 
 
 # Add Tini
 ENV TINI_VERSION v0.14.0
 ADD https://github.com/krallin/tini/releases/download/${TINI_VERSION}/tini-armhf /tini
-RUN chmod +x /tini
+COPY mopidy.conf /var/lib/mopidy/.config/mopidy/mopidy.conf
+RUN chmod +x /tini \
+ && chown mopidy:audio -R /var/lib/mopidy/.config
 RUN [ "cross-build-end" ]
 # Run as mopidy user
 USER mopidy
 
-COPY mopidy.conf /var/lib/mopidy/.config/mopidy/mopidy.conf
 VOLUME ["/mopidy/data_dir", "/mopidy/cache", "/mopidy/media", "/mopidy/playlists"]
 
 EXPOSE 6600 6680
