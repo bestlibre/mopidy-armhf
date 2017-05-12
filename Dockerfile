@@ -32,7 +32,7 @@ RUN set -ex \
  && apt-get clean \
  && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* ~/.cache 
 # Limited access rights.
-
+COPY mopidy.conf /var/lib/mopidy/.config/mopidy/mopidy.conf
 RUN chown mopidy:audio -R /var/lib/mopidy/.config
 RUN [ "cross-build-end" ]
 # Run as mopidy user
