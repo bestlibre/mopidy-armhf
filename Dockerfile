@@ -1,5 +1,4 @@
-#FROM armhf/debian:jessie
-FROM resin/armv7hf-debian-qemu:latest
+FROM bestlibre/tiny-armhf:latest
 # Default configuration
 RUN [ "cross-build-start" ]
 
@@ -34,12 +33,7 @@ RUN set -ex \
  && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* ~/.cache 
 # Limited access rights.
 
-# Add Tini
-ENV TINI_VERSION v0.14.0
-ADD https://github.com/krallin/tini/releases/download/${TINI_VERSION}/tini-armhf /tini
-COPY mopidy.conf /var/lib/mopidy/.config/mopidy/mopidy.conf
-RUN chmod +x /tini \
- && chown mopidy:audio -R /var/lib/mopidy/.config
+RUN chown mopidy:audio -R /var/lib/mopidy/.config
 RUN [ "cross-build-end" ]
 # Run as mopidy user
 USER mopidy
